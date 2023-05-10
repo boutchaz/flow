@@ -3,10 +3,16 @@ import type { ReactNode } from 'react';
 
 import Footer from './Footer';
 import Header from './Header';
+import { NavigationTabs } from './NavigationTabs';
 
 type LayoutProps = {
   children: ReactNode;
 };
+const tabs = [
+  { label: 'Visualisation', href: '/dashboard' },
+  { label: 'Get Best Deal', href: '/best-deal' },
+  { label: 'Get Rich', href: '/get-rich' },
+];
 
 const Layout = ({ children }: LayoutProps) => {
   return (
@@ -14,6 +20,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Box margin="8">
         <Header />
         <Box as="main" marginY={22}>
+          <NavigationTabs tabs={tabs} />
           {children}
         </Box>
         <Footer />
