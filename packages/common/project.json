@@ -1,0 +1,30 @@
+{
+    "name": "common",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/common/src",
+    "projectType": "library",
+    "targets": {
+      "build": {
+        "executor": "@nrwl/workspace:run-commands",
+        "options": {
+          "commands": [
+            "rimraf dist",
+            "tsc -p ./packages/common/tsconfig.build.json"
+          ],
+          "parallel": false
+        }
+      },
+      "build:watch": {
+        "executor": "@nrwl/workspace:run-commands",
+        "options": {
+          "commands": [
+            "rimraf dist",
+            "tsc --watch -p ./packages/common/tsconfig.build.json"
+          ],
+          "parallel": false
+        }
+      }
+    },
+    "tags": []
+  }
+  

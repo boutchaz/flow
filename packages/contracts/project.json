@@ -1,0 +1,30 @@
+{
+    "name": "contracts",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/contracts/src",
+    "projectType": "library",
+    "targets": {
+      "build": {
+        "executor": "@nrwl/workspace:run-commands",
+        "options": {
+          "commands": [
+            "rimraf dist",
+            "tsc -p ./packages/contracts/tsconfig.build.json"
+          ],
+          "parallel": false
+        }
+      },
+      "build:watch": {
+        "executor": "@nrwl/workspace:run-commands",
+        "options": {
+          "commands": [
+            "rimraf dist",
+            "tsc --watch -p ./packages/contracts/tsconfig.build.json"
+          ],
+          "parallel": false
+        }
+      }
+    },
+    "tags": []
+  }
+  

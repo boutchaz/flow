@@ -1,0 +1,30 @@
+{
+    "name": "config",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/config/src",
+    "projectType": "library",
+    "targets": {
+      "build": {
+        "executor": "@nrwl/workspace:run-commands",
+        "options": {
+          "commands": [
+            "rimraf dist",
+            "tsc -p ./packages/config/tsconfig.build.json"
+          ],
+          "parallel": false
+        }
+      },
+      "build:watch": {
+        "executor": "@nrwl/workspace:run-commands",
+        "options": {
+          "commands": [
+            "rimraf dist",
+            "tsc --watch -p ./packages/config/tsconfig.build.json"
+          ],
+          "parallel": false
+        }
+      }
+    },
+    "tags": []
+  }
+  
