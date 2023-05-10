@@ -1,4 +1,6 @@
-import { describe, assert, test } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { assert, describe, test, vi } from 'vitest';
+import Dashboard from '../../pages/dashboard';
 
 // Vous pouvez stocker ces données dans une base mongoDb ou bien les lire directement.
 // Seuls trois champs nous intéressent :
@@ -9,29 +11,58 @@ import { describe, assert, test } from 'vitest';
 // Nous afficherons sur le graphique le prix moyen du mois.
 // Vous pouvez créer le visuel sur la route principale.
 
+// Mocking the API call for testing
+vi.mock('react-query', () => ({
+  useQuery: () => ({
+    data: null,
+    isLoading: true,
+    error: null,
+  }),
+}));
 describe('Dashboard unit tests', () => {
-  test.todo(
-    'Should show a loading state when the component is retrieving data',
-    async () => {}
-  );
+  test('Should show a loading state when the component is retrieving data', async () => {
+    render(<Dashboard />);
+    const loadingState = screen.getByText('Loading...');
+    assert.ok(loadingState);
+  });
 
-  test.todo(
-    'Should show an error if api call fails or send an error',
-    async () => {}
-  );
+  test('Should show an error if api call fails or send an error', async () => {
+    vi.mock('react-query', () => ({
+      useQuery: () => ({
+        data: null,
+        isLoading: false,
+        error: 'Error',
+      }),
+    }));
+    render(<Dashboard />);
+    const errorState = screen.getByText('Error');
+    assert.truthy(errorState);
+  });
 
-  test.todo(
-    'Should show an empty state if no data is returned',
-    async () => {}
-  );
+  test('Should show an empty state if no data is returned', async () => {
+    vi.mock('react-query', () => ({
+      useQuery: () => ({
+        data: [],
+        isLoading: false,
+        error: null,
+      }),
+    }));
+    render(<Dashboard />);
+    const emptyState = screen.getByText('No data available');
+    assert.ok(emptyState);
+  });
 
   test.todo(
     'Should display the average price of the month successfully',
-    async () => {}
+    async () => {
+      // test will added once the algorithm is implemented in the backend
+    }
   );
 
   test.todo(
     'Should handle errors when displaying the average price of the month',
-    async () => {}
+    async () => {
+      // test will added once the algorithm is implemented in the backend
+    }
   );
 });
