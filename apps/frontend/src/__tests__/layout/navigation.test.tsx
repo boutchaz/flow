@@ -1,6 +1,6 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, vi, test, expect, beforeAll } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 import mockRouter from 'next-router-mock';
+import { beforeAll, describe, expect, test, vi } from 'vitest';
 
 import { NavigationTabs } from '../../lib/layout/NavigationTabs';
 
@@ -28,6 +28,7 @@ vi.mock('@chakra-ui/react', async () => {
 
 describe('Navigation tabs', () => {
   beforeAll(() => {
+    // eslint-disable-next-line global-require
     vi.mock('next/router', () => require('next-router-mock'));
   });
   test('renders tabs correctly', () => {
