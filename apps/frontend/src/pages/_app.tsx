@@ -1,12 +1,16 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { DefaultSeo } from 'next-seo';
 
-import defaultSEOConfig from '../../next-seo.config';
 import { Chakra } from '~/lib/components/Chakra';
 import Layout from '~/lib/layout';
+
 import '~/lib/styles/globals.css';
+import defaultSEOConfig from '../../next-seo.config';
+
+const queryClient = new QueryClient();
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
@@ -18,9 +22,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
       <DefaultSeo {...defaultSEOConfig} />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <QueryClientProvider client={queryClient}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </QueryClientProvider>
     </Chakra>
   );
 };

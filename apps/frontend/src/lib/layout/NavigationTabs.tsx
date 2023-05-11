@@ -8,8 +8,9 @@ import {
   VStack,
   useDisclosure,
 } from '@chakra-ui/react';
-import { AiOutlineMenu } from 'react-icons/ai';
 import Router from 'next/router';
+import { AiOutlineMenu } from 'react-icons/ai';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { v4 as uuidv4 } from 'uuid';
 
 interface NavigationTabsProps {
