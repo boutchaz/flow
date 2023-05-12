@@ -1,4 +1,11 @@
-import { Button, Flex, Select, Text, useToast } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  Select,
+  Text,
+  useToast,
+  useScrollTrigger,
+} from '@chakra-ui/react';
 import {
   createColumnHelper,
   flexRender,
@@ -6,8 +13,9 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { NextSeo } from 'next-seo';
-import type { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import { useState } from 'react';
+import { FaArrowUp } from 'react-icons/fa';
 
 import { useTransactionData } from '../../../modules/dashboard/hooks';
 
@@ -102,6 +110,28 @@ const GetRich = () => {
   const [execution, setExecution] = useState(0);
   const [stockBalence, setStockBalence] = useState<any>(null);
   const toast = useToast();
+  const [isVisible, setIsVisible] = useState(false);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 1400) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
   const handleAutoTrade = () => {
     transactionMutation.mutate(user, {
       onSuccess: (data) => {
@@ -112,7 +142,7 @@ const GetRich = () => {
       onError: () => {
         toast({
           title: 'An error occurred.',
-          description: 'No implemented for the second feature',
+          description: 'no implementation for the second feature',
           status: 'error',
           duration: 9000,
           isClosable: true,
@@ -148,6 +178,22 @@ const GetRich = () => {
       <Text>Stocks quantity of google: {stockBalence?.google}</Text>
 
       <TransactionTable transactions={transactions} />
+      <Button
+        position="fixed"
+        bottom="4"
+        right="4"
+        size="md"
+        variant="solid"
+        colorScheme="blue"
+        borderRadius="full"
+        opacity={isVisible ? 1 : 0}
+        transform={`translateY(${isVisible ? '0' : '20px'})`}
+        transition="transform 0.3s, opacity 0.3s"
+        onClick={scrollToTop}
+        aria-label="Scroll to Top"
+      >
+        <FaArrowUp />
+      </Button>
     </Flex>
   );
 };

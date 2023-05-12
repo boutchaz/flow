@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import { NextSeo } from 'next-seo';
 
 const Home = () => {
@@ -13,6 +13,20 @@ const Home = () => {
       w="full"
     >
       <NextSeo title="Home" />
+      <Box mt={8}>
+        <Heading as="h2" size="md" mb={2}>
+          Message to the Reviewer
+        </Heading>
+        <Text>
+          Dear Reviewer,
+          <br />
+          Thank you for taking the time to review my project.
+          <br />
+          Best regards,
+          <br />
+          [@Boutchaz]
+        </Text>
+      </Box>
     </Flex>
   );
 };
