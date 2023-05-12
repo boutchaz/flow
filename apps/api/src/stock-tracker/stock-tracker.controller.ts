@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { Public } from '@nesty/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CrudController } from './../core/crud';
@@ -11,5 +11,9 @@ import { StockService } from './stock-tracker.service';
 export class StockController extends CrudController<Stock> {
   constructor(private readonly stockService: StockService) {
     super(stockService);
+  }
+  @Get('/line')
+  async line(): Promise<any> {
+    return this.stockService.line();
   }
 }

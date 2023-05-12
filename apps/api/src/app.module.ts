@@ -6,6 +6,7 @@ import { HeaderResolver, I18nModule } from 'nestjs-i18n';
 import * as path from 'path';
 import { environment } from '@nesty/config';
 import { StockModule } from './stock-tracker/stock-tracker.module';
+import { TradingEngineModule } from './trading-engine/trading-engine.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { StockModule } from './stock-tracker/stock-tracker.module';
     }),
     CoreModule,
     StockModule,
+    TradingEngineModule
   ],
   controllers: [AppController],
   providers: [AppService],

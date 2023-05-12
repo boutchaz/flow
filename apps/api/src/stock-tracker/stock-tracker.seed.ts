@@ -23,7 +23,6 @@ const getStock = (
     timestamp,
     highestPriceOfTheDay,
     lowestPriceOfTheDay,
-    ...rest
   }: Pick<IStock, 'timestamp' | 'highestPriceOfTheDay' | 'lowestPriceOfTheDay'>,
   company: string,
 ) => {
